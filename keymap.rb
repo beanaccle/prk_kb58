@@ -1,0 +1,29 @@
+kbd = Keyboard.new
+kbd.split = true
+if tud_mounted?
+  kbd.init_pins(
+    [29, 21, 7, 8, 9],
+    [28, 27, 26, 22, 6, 4, nil]
+  )
+else
+  kbd.init_pins(
+    [26, 9, 20, 23, 21],
+    [3, 4, 5, 6, 7, 22, 27] # reverse
+  )
+end
+kbd.add_layer :default, %i[
+  KC_GRV  KC_1    KC_2    KC_3    KC_4    KC_5    XXXXXXX KC_6    KC_7    KC_8    KC_9    KC_0      KC_MINS KC_EQL
+  KC_TAB  KC_Q    KC_W    KC_E    KC_R    KC_T    XXXXXXX KC_Y    KC_U    KC_I    KC_O    KC_P      KC_LBRC KC_RBRC
+  KC_LCTL KC_A    KC_S    KC_D    KC_F    KC_G    XXXXXXX KC_H    KC_J    KC_K    KC_L    KC_SCOLON KC_QUOT KC_ENT
+  KC_LSFT KC_Z    KC_X    KC_C    KC_V    KC_B    XXXXXXX KC_N    KC_M    KC_COMM KC_DOT  KC_SLSH   KC_BSLS KC_RSFT
+  XXXXXXX XXXXXXX XXXXXXX KC_LALT KC_LGUI KC_SPC  XXXXXXX KC_SPC  FN      KC_BSPC XXXXXXX XXXXXXX   XXXXXXX XXXXXXX
+]
+kbd.add_layer :fn, %i[
+  XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX   XXXXXXX XXXXXXX
+  KC_GRV  KC_1    KC_2    KC_3    KC_4    KC_5    XXXXXXX KC_6    KC_7    KC_8    KC_9    KC_0      KC_MINS KC_EQL
+  XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXX KC_LEFT KC_DOWN KC_UP   KC_RGHT XXXXXXX   XXXXXXX XXXXXXX
+  XXXXXXX KC_F1   KC_F2   KC_F3   KC_F4   KC_F5   XXXXXXX KC_F6   KC_F7   KC_F8   KC_F9   KC_F10    KC_F11  KC_F12
+  XXXXXXX XXXXXXX XXXXXXX KC_CAPS XXXXXXX KC_ESC  XXXXXXX KC_ESC  XXXXXXX KC_DEL  XXXXXXX XXXXXXX   XXXXXXX XXXXXXX
+]
+kbd.define_mode_key :FN, [nil, :fn, nil, nil]
+kbd.start!
